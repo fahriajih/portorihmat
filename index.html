@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muhammad Rihmattulhoer — IT Support & Network Technician</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #08111E;
+      --navy2:  #0E1A2B;
+      --navy3:  #162236;
+      --cyan:   #00D4FF;
+      --cyan2:  #0099CC;
+      --amber:  #FF9500;
+      --green:  #00FF88;
+      --red:    #FF4466;
+      --light:  #E8EDF4;
+      --muted:  #6A8099;
+      --border: rgba(0,212,255,0.14);
+      --glow:   0 0 24px rgba(0,212,255,0.22);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy2); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 4px; }
+
+    /* ═══ NAV ═══ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 3rem;
+      background: rgba(8,17,30,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; color: var(--cyan); letter-spacing: 0.12em;
+    }
+    .nav-logo span { color: var(--muted); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem; font-weight: 500; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--green);
+      border: 1px solid rgba(0,255,136,0.2); padding: 0.3rem 0.8rem; border-radius: 20px;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse {
+      0%,100% { opacity:1; box-shadow: 0 0 6px var(--green); }
+      50%      { opacity:0.3; box-shadow: none; }
+    }
+
+    /* ═══ HERO ═══ */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 3rem 4rem;
+      position: relative; overflow: hidden;
+      gap: 4rem;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+    .hero-glow-blob {
+      position: absolute; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 68%);
+      right: 10%; top: 10%; pointer-events: none;
+    }
+
+    /* Left: text */
+    .hero-left { position: relative; z-index: 1; flex: 1; max-width: 600px; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+      color: var(--cyan); letter-spacing: 0.16em; text-transform: uppercase;
+      border: 1px solid var(--border); padding: 0.35rem 0.9rem; border-radius: 2px;
+      margin-bottom: 1.6rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: inline-block; width: 6px; height: 6px;
+      background: var(--cyan); border-radius: 50%; animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    .hero-name {
+      font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+      font-weight: 900; line-height: 1.0; letter-spacing: -0.025em;
+      margin-bottom: 0.6rem;
+    }
+    .hero-name .white { color: var(--light); }
+    .hero-name .blue  { color: var(--cyan); }
+
+    .hero-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.78rem, 1.5vw, 1rem);
+      color: var(--muted); margin-bottom: 1.6rem; letter-spacing: 0.04em;
+    }
+    .hero-role .hl { color: var(--amber); }
+
+    .hero-desc {
+      font-size: 0.97rem; color: #7A9BB5; line-height: 1.82;
+      max-width: 500px; margin-bottom: 2.5rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-cyan {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.75rem 1.8rem; text-decoration: none; border-radius: 2px;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-cyan:hover { background: #33ddff; box-shadow: 0 0 28px rgba(0,212,255,0.45); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--border); color: var(--muted);
+      font-size: 0.8rem; font-weight: 500; padding: 0.75rem 1.8rem;
+      text-decoration: none; border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* Right: photo card */
+    .hero-right {
+      position: relative; z-index: 1; flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+
+    .photo-wrapper {
+      position: relative; width: 240px; height: 240px;
+    }
+    /* animated corner brackets */
+    .photo-wrapper::before, .photo-wrapper::after,
+    .photo-wrapper .corner-br, .photo-wrapper .corner-tl2 {
+      content: ''; position: absolute; width: 28px; height: 28px;
+      border-color: var(--cyan); border-style: solid;
+    }
+    .photo-wrapper::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+    .photo-wrapper::after  { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+    .photo-wrapper .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+    .photo-wrapper .corner-bl { content: ''; position: absolute; width: 28px; height: 28px; bottom: -5px; left: -5px; border: solid var(--cyan); border-width: 0 0 2px 2px; }
+
+    /* Glow ring behind photo */
+    .photo-glow {
+      position: absolute; inset: -12px; border-radius: 6px;
+      background: radial-gradient(ellipse, rgba(0,212,255,0.12) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+      animation: glow-breathe 3s ease-in-out infinite;
+    }
+    @keyframes glow-breathe {
+      0%,100% { opacity: 0.7; } 50% { opacity: 1.0; }
+    }
+
+    /* ✏️ FOTO PROFIL — ganti src="foto-profil.jpg" dengan nama file foto kamu */
+    .photo-img {
+      position: relative; z-index: 1;
+      width: 240px; height: 240px; object-fit: cover;
+      display: block; border-radius: 4px;
+      border: 1px solid rgba(0,212,255,0.25);
+      filter: grayscale(15%) contrast(1.08) brightness(0.96);
+    }
+    .photo-fallback {
+      position: relative; z-index: 1;
+      width: 240px; height: 240px; border-radius: 4px;
+      background: var(--navy2); border: 1px dashed rgba(0,212,255,0.3);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 0.6rem; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+      color: var(--muted);
+    }
+    .photo-fallback .pf-icon { font-size: 3rem; }
+    .photo-fallback .pf-hint { color: var(--cyan); font-size: 0.6rem; line-height: 1.6; }
+
+    .photo-id-card {
+      width: 240px; background: var(--navy2);
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 0.7rem 1rem;
+    }
+    .id-name {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+      color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 0.15rem;
+    }
+    .id-school {
+      font-size: 0.7rem; color: var(--muted); letter-spacing: 0.03em;
+    }
+    .id-jurusan {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      color: var(--amber); margin-top: 0.3rem; letter-spacing: 0.06em;
+    }
+
+    /* ═══ STATS BAR ═══ */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      background: var(--navy2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat { padding: 1.6rem 2rem; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'JetBrains Mono', monospace; font-size: 2rem;
+      font-weight: 700; color: var(--cyan); line-height: 1; margin-bottom: 0.25rem;
+    }
+    .stat-l { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* ═══ SECTION SHARED ═══ */
+    section { padding: 5.5rem 3rem; }
+
+    .sec-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+      color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .sec-title { font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 700; letter-spacing: -0.01em; }
+    .sec-line { width: 44px; height: 2px; background: var(--cyan); margin-top: 0.9rem; margin-bottom: 3rem; }
+
+    /* ═══ ABOUT ═══ */
+    #about { background: var(--navy2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: #7A9BB5; font-size: 0.96rem; line-height: 1.85; margin-bottom: 1.1rem; }
+    .about-text p strong { color: var(--light); font-weight: 600; }
+    .info-row {
+      display: flex; gap: 1rem; align-items: baseline;
+      padding: 0.8rem 0; border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; min-width: 90px; flex-shrink: 0;
+    }
+    .info-val { font-size: 0.88rem; color: var(--light); }
+    .info-val a { color: var(--cyan); text-decoration: none; }
+
+    /* ═══ SKILLS ═══ */
+    #skills { background: var(--navy); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.3rem; }
+    .sk-card {
+      background: var(--navy2); border: 1px solid var(--border); border-radius: 4px;
+      padding: 1.7rem; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .sk-card:hover { border-color: var(--cyan); box-shadow: var(--glow); transform: translateY(-3px); }
+    .sk-ico { font-size: 1.7rem; margin-bottom: 0.9rem; }
+    .sk-name { font-weight: 600; font-size: 0.93rem; margin-bottom: 0.4rem; }
+    .sk-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      background: rgba(0,212,255,0.07); color: var(--cyan);
+      border: 1px solid rgba(0,212,255,0.18); padding: 0.18rem 0.55rem; border-radius: 2px;
+    }
+
+    /* ═══ EXPERIENCE ═══ */
+    #experience { background: var(--navy2); }
+    .timeline { padding-left: 1.8rem; border-left: 1px solid var(--border); }
+    .tl-item { position: relative; padding-left: 2rem; margin-bottom: 2.8rem; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -2.35rem; top: 0.2rem;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--navy2); border: 2px solid var(--cyan);
+    }
+    .tl-dot.active { background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+    .tl-period {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+      color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 0.3rem;
+    }
+    .tl-role { font-size: 1rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .tl-company { font-size: 0.82rem; color: var(--amber); font-weight: 500; margin-bottom: 0.7rem; }
+    .tl-bullets { list-style: none; }
+    .tl-bullets li {
+      font-size: 0.83rem; color: var(--muted); padding: 0.25rem 0 0.25rem 1rem;
+      position: relative; line-height: 1.65;
+    }
+    .tl-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--cyan); font-size: 0.65rem; top: 0.3rem; }
+
+    /* ═══ PROJECTS ═══ */
+    #projects { background: var(--navy); }
+    .proj-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.3rem; }
+    .proj-card {
+      background: var(--navy2); border: 1px solid var(--border); border-radius: 4px;
+      overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .proj-card:hover { border-color: var(--cyan); box-shadow: var(--glow); transform: translateY(-3px); }
+    .proj-head {
+      padding: 1.3rem 1.5rem; background: rgba(0,212,255,0.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-type {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      color: var(--amber); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.35rem;
+    }
+    .proj-name { font-size: 0.97rem; font-weight: 700; }
+    .proj-body { padding: 1.3rem 1.5rem; }
+    .proj-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.72; margin-bottom: 1rem; }
+    .tech-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+      background: rgba(255,149,0,0.09); color: var(--amber);
+      border: 1px solid rgba(255,149,0,0.2); padding: 0.18rem 0.55rem; border-radius: 2px;
+    }
+
+    /* ═══ CERTIFICATIONS ═══ */
+    #certifications { background: var(--navy2); }
+    .cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.3rem; }
+
+    /* ── Cert card with image ── */
+    .cert-card {
+      background: var(--navy); border: 1px solid var(--border); border-radius: 4px;
+      overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .cert-card:hover { border-color: rgba(0,212,255,0.45); box-shadow: var(--glow); transform: translateY(-3px); }
+
+    /* ✏️ GAMBAR SERTIFIKAT — ganti src pada masing-masing <img> di bawah */
+    .cert-img-wrap {
+      position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden;
+      background: var(--navy2); border-bottom: 1px solid var(--border);
+    }
+    .cert-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.3s;
+    }
+    .cert-card:hover .cert-img { transform: scale(1.04); }
+
+    /* placeholder if image missing */
+    .cert-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 0.4rem;
+      background: var(--navy3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; color: var(--muted); text-align: center; padding: 1rem;
+    }
+    .cert-img-placeholder .ci-icon { font-size: 2rem; }
+    .cert-img-placeholder .ci-hint { color: rgba(0,212,255,0.5); font-size: 0.55rem; line-height: 1.7; }
+
+    .cert-info { padding: 1.1rem 1.2rem; }
+    .cert-badge {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+      color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.35rem;
+    }
+    .cert-name { font-size: 0.85rem; font-weight: 600; color: var(--light); margin-bottom: 0.2rem; line-height: 1.4; }
+    .cert-issuer { font-size: 0.75rem; color: var(--muted); }
+    .cert-year {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      color: var(--cyan); margin-top: 0.4rem;
+    }
+
+    /* ═══ TOOLS ═══ */
+    #tools { background: var(--navy); }
+    .tools-wrap { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .tool-chip {
+      display: flex; align-items: center; gap: 0.45rem;
+      background: var(--navy2); border: 1px solid var(--border); border-radius: 2px;
+      padding: 0.55rem 1rem; font-size: 0.8rem; color: var(--light); font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tool-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+    .tool-chip .ti { font-size: 1rem; }
+
+    /* ═══ CONTACT ═══ */
+    #contact { background: var(--navy2); }
+    .contact-inner { max-width: 620px; margin: 0 auto; text-align: center; }
+    .contact-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.78; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 2rem; }
+    .c-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--border); color: var(--muted);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      padding: 0.6rem 1.2rem; text-decoration: none; border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .c-link:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 14px rgba(0,212,255,0.15); }
+
+    /* ═══ FOOTER ═══ */
+    footer {
+      background: var(--navy); border-top: 1px solid var(--border);
+      padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+    .f-status { display: flex; align-items: center; gap: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--green); }
+
+    /* ═══ FADE IN ═══ */
+    .fi { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fi.show { opacity: 1; transform: translateY(0); }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 960px) {
+      nav { padding: 0.9rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { flex-direction: column-reverse; padding: 7rem 1.5rem 4rem; gap: 2.5rem; align-items: flex-start; }
+      .hero-right { align-self: center; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-grid { grid-template-columns: repeat(2,1fr); }
+      .proj-grid { grid-template-columns: 1fr; }
+      .cert-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .photo-wrapper, .photo-img, .photo-fallback { width: 180px; height: 180px; }
+      .photo-id-card { width: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <div class="nav-logo"><span>// </span>RIHMATTULHOER</div>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#skills">Keahlian</a></li>
+    <li><a href="#experience">Pengalaman</a></li>
+    <li><a href="#projects">Proyek</a></li>
+    <li><a href="#certifications">Sertifikasi</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+  <div class="nav-pill"><div class="dot"></div>ONLINE</div>
+</nav>
+
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-glow-blob"></div>
+
+  <!-- TEKS KIRI -->
+  <div class="hero-left fi">
+    <div class="hero-eyebrow">TJKT · SMK Wikrama Bogor</div>
+    <h1 class="hero-name">
+      <span class="white">Muhammad<br>Rihmattu</span><span class="blue">lhoer</span>
+    </h1>
+    <p class="hero-role">
+      <span class="hl">&lt;</span> IT Support <span class="hl">&amp;</span> Network Technician <span class="hl">/&gt;</span>
+    </p>
+    <p class="hero-desc">
+      Teknisi jaringan yang siap turun lapangan — instalasi kabel UTP/fiber optik, konfigurasi Mikrotik, troubleshooting koneksi, hingga monitoring infrastruktur ISP. Cepat, teliti, dan bertanggung jawab.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-cyan">▶ Lihat Proyek</a>
+      <a href="#contact" class="btn-outline">Hubungi Saya</a>
+    </div>
+  </div>
+
+  <!-- FOTO KANAN -->
+  <div class="hero-right fi">
+    <div class="photo-wrapper">
+      <div class="photo-glow"></div>
+      <div class="corner-br"></div>
+      <div class="corner-bl"></div>
+
+      <!--
+        ╔══════════════════════════════════════════════════╗
+        ║  ✏️  GANTI FOTO PROFIL                           ║
+        ║  Ubah src="foto-profil.jpg" menjadi              ║
+        ║  nama file foto kamu, contoh:                    ║
+        ║  src="rihmat.jpg"  atau  src="foto/saya.png"     ║
+        ╚══════════════════════════════════════════════════╝
+      -->
+      <img
+        src="pp.jpeg"
+        alt="Muhammad Rihmattulhoer"
+        class="photo-img"
+        onerror="this.style.display='none'; document.getElementById('ph-fallback').style.display='flex';"
+      />
+      <div id="ph-fallback" class="photo-fallback" style="display:none;">
+        <div class="pf-icon">👤</div>
+        <div>Taruh foto kamu</div>
+        <div class="pf-hint">
+          Ganti src pada &lt;img&gt;<br>
+          dengan path foto kamu<br>
+          contoh: src="foto.jpg"
+        </div>
+      </div>
+
+    </div>
+    <div class="photo-id-card">
+      <div class="id-name">RIHMATTULHOER</div>
+      <div class="id-school">SMK Wikrama Bogor</div>
+      <div class="id-jurusan">TJKT · IT Support &amp; Network</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ STATS ═══════════════ -->
+<div class="stats-bar">
+  <div class="stat fi"><div class="stat-n">3+</div><div class="stat-l">Tahun Belajar Aktif</div></div>
+  <div class="stat fi"><div class="stat-n">15+</div><div class="stat-l">Proyek Jaringan</div></div>
+  <div class="stat fi"><div class="stat-n">99%</div><div class="stat-l">Uptime Target</div></div>
+  <div class="stat fi"><div class="stat-n">0</div><div class="stat-l">Tiket Tak Terselesaikan</div></div>
+</div>
+
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="fi">
+    <div class="sec-tag">// 01 · Tentang Saya</div>
+    <h2 class="sec-title">Siapa Saya?</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fi">
+      <p>Halo! Saya <strong>Muhammad Rihmattulhoer</strong>, siswa jurusan <strong>Teknik Jaringan Komputer &amp; Telekomunikasi (TJKT)</strong> di SMK Wikrama Bogor. Saya memiliki passion besar di bidang infrastruktur jaringan dan IT Support lapangan.</p>
+      <p>Fokus saya ada di dunia nyata: instalasi kabel UTP/fiber optik, konfigurasi perangkat Mikrotik &amp; Cisco, troubleshooting masalah koneksi internet, hingga penggelaran jaringan untuk skala gedung atau perumahan layaknya pekerjaan teknisi ISP.</p>
+      <p>Saya percaya jaringan yang baik adalah fondasi dari segalanya — dan saya di sini untuk membangun fondasi itu dengan teliti, cepat, dan penuh tanggung jawab.</p>
+    </div>
+    <div class="fi">
+      <div class="info-row"><span class="info-key">Nama</span><span class="info-val">Muhammad Rihmattulhoer</span></div>
+      <div class="info-row"><span class="info-key">Sekolah</span><span class="info-val">SMK Wikrama Bogor</span></div>
+      <div class="info-row"><span class="info-key">Jurusan</span><span class="info-val">TJKT — Teknik Jaringan Komputer &amp; Telekomunikasi</span></div>
+      <div class="info-row"><span class="info-key">Lokasi</span><span class="info-val">Bogor, Jawa Barat</span></div>
+      <div class="info-row"><span class="info-key">Fokus</span><span class="info-val">IT Support · Network Technician · ISP</span></div>
+      <div class="info-row"><span class="info-key">Status</span><span class="info-val" style="color:var(--green);">● Siap Magang / Kerja</span></div>
+      <div class="info-row"><span class="info-key">Email</span><span class="info-val"><a href="mailto:rihmattulhoer@email.com">rihmattulhoer@email.com</a></span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<section id="skills">
+  <div class="fi">
+    <div class="sec-tag">// 02 · Keahlian</div>
+    <h2 class="sec-title">Technical Skills</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="sk-card fi">
+      <div class="sk-ico">🔌</div>
+      <div class="sk-name">Instalasi &amp; Krimping Kabel</div>
+      <div class="sk-desc">Pemasangan kabel UTP Cat5e/Cat6 standar T568A/T568B, krimping RJ45, labeling, dan manajemen kabel di patch panel atau rak server.</div>
+      <div class="tags"><span class="tag">UTP Cat6</span><span class="tag">RJ45</span><span class="tag">Patch Panel</span><span class="tag">T568B</span></div>
+    </div>
+    <div class="sk-card fi">
+      <div class="sk-ico">🌐</div>
+      <div class="sk-name">Konfigurasi Router &amp; Switch</div>
+      <div class="sk-desc">Setup Mikrotik &amp; TP-Link, pengaturan VLAN, DHCP server, NAT, port forwarding, serta manajemen bandwidth LAN/WAN.</div>
+      <div class="tags"><span class="tag">Mikrotik</span><span class="tag">VLAN</span><span class="tag">DHCP</span><span class="tag">NAT</span><span class="tag">Winbox</span></div>
+    </div>
+    <div class="sk-card fi">
+      <div class="sk-ico">📶</div>
+      <div class="sk-name">Wireless Network</div>
+      <div class="sk-desc">Instalasi Access Point, pengaturan SSID, keamanan WPA2/WPA3, site survey sinyal WiFi, dan penanganan interferensi 2.4GHz &amp; 5GHz.</div>
+      <div class="tags"><span class="tag">Access Point</span><span class="tag">WPA3</span><span class="tag">Site Survey</span><span class="tag">5GHz</span></div>
+    </div>
+    <div class="sk-card fi">
+      <div class="sk-ico">🔍</div>
+      <div class="sk-name">Troubleshooting &amp; Diagnosa</div>
+      <div class="sk-desc">Diagnosa jaringan sistematis: cek konektivitas, traceroute, analisa packet loss, pengecekan hardware, dan dokumentasi tiket eskalasi.</div>
+      <div class="tags"><span class="tag">Ping</span><span class="tag">Traceroute</span><span class="tag">Wireshark</span><span class="tag">Ticketing</span></div>
+    </div>
+    <div class="sk-card fi">
+      <div class="sk-ico">💻</div>
+      <div class="sk-name">IT Support &amp; Helpdesk</div>
+      <div class="sk-desc">Penanganan hardware/software pengguna, instalasi OS Windows/Linux, konfigurasi printer sharing, dan maintenance perangkat kantor.</div>
+      <div class="tags"><span class="tag">Windows</span><span class="tag">Linux</span><span class="tag">Remote Desktop</span><span class="tag">Helpdesk</span></div>
+    </div>
+    <div class="sk-card fi">
+      <div class="sk-ico">🔧</div>
+      <div class="sk-name">Fiber Optik (Dasar)</div>
+      <div class="sk-desc">Pemahaman infrastruktur FTTH: kabel fiber, splitter, ODP, ONU/ONT. Pembacaan diagram jalur dan asistensi instalasi kabel fiber di lapangan.</div>
+      <div class="tags"><span class="tag">FTTH</span><span class="tag">ODP</span><span class="tag">ONT</span><span class="tag">Splitter</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ EXPERIENCE ═══════════════ -->
+<section id="experience">
+  <div class="fi">
+    <div class="sec-tag">// 03 · Pengalaman</div>
+    <h2 class="sec-title">Riwayat &amp; Kegiatan</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="timeline fi">
+    <div class="tl-item">
+      <div class="tl-dot active"></div>
+      <div class="tl-period">2024 — Sekarang</div>
+      <div class="tl-role">Siswa Aktif TJKT</div>
+      <div class="tl-company">SMK Wikrama Bogor</div>
+      <ul class="tl-bullets">
+        <li>Praktikum konfigurasi jaringan LAN, WAN, dan WLAN di lab komputer sekolah</li>
+        <li>Proyek pemasangan jaringan komputer antar ruang kelas dan lab sekolah</li>
+        <li>Latihan konfigurasi Mikrotik RouterOS dan simulasi Cisco Packet Tracer</li>
+        <li>Materi keamanan jaringan dasar: firewall, ACL, dan monitoring trafik</li>
+        <li>Kompetisi LKS bidang IT Network Systems Administration</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">2024</div>
+      <div class="tl-role">Praktik Kerja Lapangan (PKL)</div>
+      <div class="tl-company">Perusahaan / ISP Mitra SMK Wikrama</div>
+      <ul class="tl-bullets">
+        <li>Turun lapangan bersama teknisi senior untuk instalasi perangkat jaringan</li>
+        <li>Asistensi konfigurasi router dan switch di lokasi pelanggan ISP</li>
+        <li>Pengecekan dan perbaikan gangguan koneksi internet di lapangan</li>
+        <li>Dokumentasi pekerjaan instalasi dan pelaporan hasil tiket</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">2023</div>
+      <div class="tl-role">Proyek Jaringan Sekolah</div>
+      <div class="tl-company">SMK Wikrama Bogor — Tim TJKT</div>
+      <ul class="tl-bullets">
+        <li>Pemasangan infrastruktur jaringan di lingkungan sekolah bersama tim</li>
+        <li>Setup access point dan manajemen koneksi internet area kampus</li>
+        <li>Pembuatan dokumen topologi jaringan dan IP addressing scheme</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ PROJECTS ═══════════════ -->
+<section id="projects">
+  <div class="fi">
+    <div class="sec-tag">// 04 · Proyek</div>
+    <h2 class="sec-title">Proyek yang Dikerjakan</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card fi">
+      <div class="proj-head">
+        <div class="proj-type">Lab Networking</div>
+        <div class="proj-name">Konfigurasi Jaringan Multi-VLAN Sekolah</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-desc">Desain dan implementasi jaringan sekolah dengan segmentasi VLAN untuk memisahkan trafik guru, siswa, dan administrasi. Dilengkapi DHCP per-VLAN dan inter-VLAN routing menggunakan Mikrotik.</div>
+        <div class="tags"><span class="tech-tag">Mikrotik</span><span class="tech-tag">VLAN</span><span class="tech-tag">DHCP</span><span class="tech-tag">Managed Switch</span></div>
+      </div>
+    </div>
+    <div class="proj-card fi">
+      <div class="proj-head">
+        <div class="proj-type">Wireless Deployment</div>
+        <div class="proj-name">Hotspot &amp; Bandwidth Management Kampus</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-desc">Instalasi sistem hotspot berbasis Mikrotik untuk kampus: login portal, pembatasan bandwidth per user, dan monitoring penggunaan bandwidth real-time via The Dude.</div>
+        <div class="tags"><span class="tech-tag">Mikrotik Hotspot</span><span class="tech-tag">Queue Tree</span><span class="tech-tag">The Dude</span><span class="tech-tag">Ubiquiti</span></div>
+      </div>
+    </div>
+    <div class="proj-card fi">
+      <div class="proj-head">
+        <div class="proj-type">Simulasi ISP</div>
+        <div class="proj-name">Simulasi Topologi Jaringan ISP</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-desc">Simulasi arsitektur ISP skala kecil dengan Cisco Packet Tracer: core router, distribution layer, pelanggan end-user, dynamic routing OSPF dan subnetting.</div>
+        <div class="tags"><span class="tech-tag">Cisco PT</span><span class="tech-tag">OSPF</span><span class="tech-tag">BGP Dasar</span><span class="tech-tag">Subnetting</span></div>
+      </div>
+    </div>
+    <div class="proj-card fi">
+      <div class="proj-head">
+        <div class="proj-type">IT Support</div>
+        <div class="proj-name">Maintenance Lab Komputer 30+ Unit</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-desc">Pemeliharaan rutin komputer lab sekolah: reinstall OS, update driver, perbaikan hardware, setup jaringan peer-to-peer, dan troubleshooting printer sharing.</div>
+        <div class="tags"><span class="tech-tag">Windows 10/11</span><span class="tech-tag">Hardware</span><span class="tech-tag">Printer Share</span><span class="tech-tag">Preventive Maint.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ CERTIFICATIONS ═══════════════ -->
+<section id="certifications">
+  <div class="fi">
+    <div class="sec-tag">// 05 · Sertifikasi &amp; Pendidikan</div>
+    <h2 class="sec-title">Sertifikasi &amp; Pencapaian</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="cert-grid">
+
+    <!-- ──────────────────────────────────────────
+         ✏️ CARA GANTI GAMBAR SERTIFIKAT:
+         Setiap <img src="sertifikat-X.jpg"> tinggal
+         diganti dengan nama/path file gambarnya.
+         Contoh: src="sertifikat/cisco.jpg"
+         Jika file belum ada, akan tampil placeholder.
+    ────────────────────────────────────────── -->
+
+ <!-- SERTIFIKAT 1 -->
+<div class="cert-card fi">
+  <div class="cert-img-wrap">
+    <img
+      src="virtualmachine.jpeg"
+      alt="Sertifikat Virtual Machine Fundamental"
+      class="cert-img"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    <div class="cert-img-placeholder" style="display:none;">
+      <div class="ci-icon">🎓</div>
+      <div>Sertifikat / Ijazah</div>
+      <div class="ci-hint">Ganti src="virtualmachine.jpeg"<br>dengan file foto sertifikat</div>
+    </div>
+  </div>
+  <div class="cert-info">
+    <div class="cert-badge">Pelatihan Fundamental</div>
+    <div class="cert-name">Virtual Machine Fundamental</div>
+    <div class="cert-issuer">Aguna</div>
+    <div class="cert-year">2024</div>
+  </div>
+</div>
+
+<!-- SERTIFIKAT 2 -->
+<div class="cert-card fi">
+  <div class="cert-img-wrap">
+    <img
+      src="introduction.jpeg"
+      alt="Sertifikat Introduction to Cybersecurity"
+      class="cert-img"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    <div class="cert-img-placeholder" style="display:none;">
+      <div class="ci-icon">📜</div>
+      <div>Sertifikat Cisco / Netacad</div>
+      <div class="ci-hint">Ganti src="introduction.jpeg"<br>dengan file foto sertifikat</div>
+    </div>
+  </div>
+  <div class="cert-info">
+    <div class="cert-badge">Cisco / Netacad</div>
+    <div class="cert-name">Introduction to Cybersecurity</div>
+    <div class="cert-issuer">Cisco Networking Academy</div>
+    <div class="cert-year">2026</div>
+  </div>
+</div>
+
+<!-- SERTIFIKAT 3 -->
+<div class="cert-card fi">
+  <div class="cert-img-wrap">
+    <img
+      src="ccna network.jpeg"
+      alt="Sertifikat Learn CCNA 200-301 Network Fundamentals"
+      class="cert-img"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    <div class="cert-img-placeholder" style="display:none;">
+      <div class="ci-icon">🏆</div>
+      <div>Sertifikat SkillUp / Simplilearn</div>
+      <div class="ci-hint">Ganti src="ccna network.jpeg"<br>dengan file foto sertifikat</div>
+    </div>
+  </div>
+  <div class="cert-info">
+    <div class="cert-badge">Online Course</div>
+    <div class="cert-name">Learn CCNA 200-301 Network Fundamentals Online</div>
+    <div class="cert-issuer">SkillUp — Simplilearn</div>
+    <div class="cert-year">2026</div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ TOOLS ═══════════════ -->
+<section id="tools">
+  <div class="fi">
+    <div class="sec-tag">// 06 · Tools &amp; Perangkat</div>
+    <h2 class="sec-title">Yang Saya Gunakan Sehari-hari</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="tools-wrap fi">
+    <div class="tool-chip"><span class="ti">🔧</span> Winbox</div>
+    <div class="tool-chip"><span class="ti">📦</span> Cisco Packet Tracer</div>
+    <div class="tool-chip"><span class="ti">📊</span> The Dude (Mikrotik)</div>
+    <div class="tool-chip"><span class="ti">🔍</span> Wireshark</div>
+    <div class="tool-chip"><span class="ti">💻</span> PuTTY / SSH</div>
+    <div class="tool-chip"><span class="ti">🌐</span> PRTG / Zabbix</div>
+    <div class="tool-chip"><span class="ti">🖥️</span> VMware / VirtualBox</div>
+    <div class="tool-chip"><span class="ti">🐧</span> Ubuntu Linux</div>
+    <div class="tool-chip"><span class="ti">⚡</span> PowerShell</div>
+    <div class="tool-chip"><span class="ti">📋</span> Jira (Ticketing)</div>
+    <div class="tool-chip"><span class="ti">🔌</span> Krimping Tool &amp; Cable Tester</div>
+    <div class="tool-chip"><span class="ti">📡</span> OTDR (Fiber Tester)</div>
+    <div class="tool-chip"><span class="ti">🗺️</span> Draw.io (Network Diagram)</div>
+    <div class="tool-chip"><span class="ti">☁️</span> Google Workspace</div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="fi">
+    <div class="sec-tag" style="text-align:center;">// 07 · Kontak</div>
+    <h2 class="sec-title" style="text-align:center;">Hubungi Saya</h2>
+    <div class="sec-line" style="margin-left:auto;margin-right:auto;"></div>
+  </div>
+  <div class="contact-inner fi">
+    <p class="contact-desc">Sedang mencari IT Support atau Network Technician yang siap turun lapangan? Atau butuh kolaborasi proyek jaringan? Jangan ragu untuk menghubungi saya!</p>
+    <div class="contact-links">
+      <a href="mailto:rihmattulhoer@email.com" class="c-link"><span>✉️</span> Email</a>
+      <a href="https://wa.me/6281234567890" target="_blank" class="c-link"><span>💬</span> WhatsApp</a>
+      <a href="https://linkedin.com/in/rihmattulhoer" target="_blank" class="c-link"><span>🔗</span> LinkedIn</a>
+      <a href="https://github.com/rihmattulhoer" target="_blank" class="c-link"><span>🐙</span> GitHub</a>
+    </div>
+    <a href="mailto:rihmattulhoer@email.com" class="btn-cyan" style="display:inline-flex;">📨 Kirim Pesan</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <p>© 2025 · Muhammad Rihmattulhoer · TJKT SMK Wikrama Bogor</p>
+  <div class="f-status"><div class="dot"></div>ALL SYSTEMS OPERATIONAL</div>
+</footer>
+
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fi').forEach(el => observer.observe(el));
+
+  // Stagger grid children
+  ['skills-grid','proj-grid','cert-grid','stats-bar'].forEach(cls => {
+    const grid = document.querySelector('.' + cls);
+    if (!grid) return;
+    grid.querySelectorAll('.sk-card,.proj-card,.cert-card,.stat').forEach((c,i) => {
+      c.style.transitionDelay = `${i * 75}ms`;
+    });
+  });
+
+  // Active nav highlight
+  const secs = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 180) cur = s.id; });
+    links.forEach(a => { a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--cyan)' : ''; });
+  });
+
+  // Smooth image error fallback already handled via onerror attrs
+</script>
+</body>
+</html>
